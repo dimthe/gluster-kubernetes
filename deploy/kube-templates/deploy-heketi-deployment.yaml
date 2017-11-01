@@ -73,6 +73,6 @@ spec:
             port: 8080
       volumes:
       - name: db
-      - name: config
-        secret:
-          secretName: heketi-config-secret
+      #- name: config
+        #secret:
+          #secretName: heketi-config-secret
