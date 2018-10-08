@@ -1,0 +1,21 @@
+For testing purposes we can use loop devices to mimic real hard drives. Here is a quick how to :
+
+Assuming we need 3 storage devices for our 3 nodes gluster-kubernetes deployment 
+
+First create a blank raw disk image (50GB in our case):
+    # dd if=/dev/zero of=disk0.img bs=1024k seek=50000 count=0
+    0+0 records in
+    0+0 records out
+    0 bytes (0 B) copied, 2.7301e-05 s, 0.0 kB/s
+    # ls -lh
+    total 50G
+    -rw-r--r-- 1 root root  50G Dec 13 11:13 disk0.img
+Mount it as a loopback device :
+    # losetup -f disk0.img
+    # losetup -a
+
+Check that it seems to be a valid block device:
+    # fdisk /dev/loop0
+    
+    
+    Repeat the above steps in each node . Once finished the topology.json should be edited to reflect your /dev/loop0 devices
